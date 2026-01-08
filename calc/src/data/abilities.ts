@@ -339,7 +339,23 @@ const SV = SS.concat([
   'Zero to Hero',
 ]);
 
-export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
+// Unsorted abilities list bc I cba to presort. Let a computer handle it I'm lazy.
+const SVNDCAbilities: string[] = [
+  'Chronal Distortion',
+  'Spacial Distortion',
+  'Absolute Distortion',
+  'Apex Predator',
+  'Frolicking',
+  'Terravore',
+  'Midas Touch',
+  'Weaver\'s Dance',
+  'Origin of Time',
+  'Origin of Space',
+];
+SVNDCAbilities.sort();
+const SVNDC = SV.concat(SVNDCAbilities);
+
+export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV, SVNDC];
 
 export class Abilities implements I.Abilities {
   private readonly gen: I.GenerationNum;

@@ -4931,10 +4931,94 @@ const ZA_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     ignoreDefensive: true,
   },
 };
-
 const SV: {[name: string]: MoveData} = extend(true, {}, SS, SV_PATCH, ZA_PATCH);
 
-export const MOVES = [{}, RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
+const SV_NDC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
+  // Modified
+  'Core Enforcer': {category: 'Physical'},
+  'Dragon Rush': {bp: 90},
+  Eruption: {secondaries: true},
+  'Hammer Arm': {bp: 120},
+  'Mud Shot': {bp: 70},
+  'Power Gem': {bp: 90},
+  'Razor Shell': {bp: 85},
+  'Shadow Claw': {bp: 80},
+  'Spacial Rend': {bp: 120},
+  'Sparkly Swirl': {bp: 60},
+  Submission: {bp: 90},
+
+  // Custom
+  'Desert Song': {
+    bp: 90,
+    type: 'Ground',
+    category: 'Special',
+    zp: 175,
+    // TODO: Sandstorm boost. Setting sandstorm. hits protect
+    target: 'allAdjacentFoes',
+    maxPower: 130,
+    isSound: true,
+  },
+  'Neutron Ray': {
+    bp: 100,
+    type: 'Dark',
+    category: 'Special',
+    zp: 180,
+    maxPower: 130,
+    secondaries: true,
+    // TODO: No contact, uses highest attacking stat. Hits protect,
+  },
+  Shadowflame: {
+    bp: 80,
+    type: 'Ghost',
+    category: 'Special',
+    secondaries: true,
+    zp: 160,
+    maxPower: 130,
+  },
+  'Time Stop': {
+    // TODO: Uh oh?
+    bp: 0,
+    type: 'Psychic',
+    priority: 4,
+  },
+  Stalk: {
+    bp: 80,
+    type: 'Ghost',
+    category: 'Physical',
+    isBite: true,
+    isSlicing: true,
+    makesContact: true,
+    secondaries: true,
+    zp: 160,
+    maxPower: 130,
+    // TODO: hits protect. 1.5x power boost when moving after the target.
+  },
+  'Shadow Fangs': {
+    bp: 70,
+    type: 'Ghost',
+    category: 'Physical',
+    makesContact: true,
+    isBite: true,
+    breaksProtect: true, // TODO: Does not deal damage when breaking protect.
+  },
+  'Needle Throw': {
+    bp: 100,
+    type: 'Steel',
+    category: 'Physical',
+    isBullet: true,
+    isSlicing: true,
+    secondaries: true,
+    // Distance move, fails during gravity
+  },
+  'Weave Garments': {
+    bp: 0,
+    type: 'Bug',
+    // TODO: Check if this is sufficient.
+  },
+};
+
+const SVNDC: {[name: string]: MoveData} = extend(true, {}, SS, SV_PATCH, SV_NDC_PATCH);
+export const MOVES = [{}, RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV, SVNDC];
 
 export class Moves implements I.Moves {
   private readonly gen: I.GenerationNum;

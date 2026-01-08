@@ -10591,7 +10591,61 @@ const ZA_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
 
 const SV: {[name: string]: SpeciesData} = extend(true, {}, SS, SV_PATCH, PLA_PATCH, ZA_PATCH);
 
-export const SPECIES = [{}, RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
+const SVNDC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
+  // Gen 1
+  'Pidgeot-Mega': {types: ['Electric', 'Flying']},
+  'Slowbro-Mega': {bs: {sa: 100, sd: 110}},
+  // Gen 2
+  Ampharos: {types: ['Electric', 'Dragon'], bs: {hp: 100}},
+  'Ampharos-Mega': {bs: {hp: 100, df: 110, sd: 115}},
+  Celebi: {bs: {hp: 120, at: 50, df: 130, sd: 110}},
+  Suicune: {bs: {df: 125, sd: 125}},
+  Politoed: {bs: {df: 100}},
+  Crobat: {bs: {at: 100}},
+  // Gen 3
+  Aggron: {bs: {hp: 80, sd: 80}},
+  'Aggron-Mega': {bs: {hp: 80, sd: 80}},
+  'Banette-Mega': {bs: {df: 85, sa: 83, sd: 93, sp: 65}},
+  Breloom: {bs: {hp: 80, df: 90, sd: 70}},
+  'Camerupt-Mega': {bs: {at: 80, df: 120, sd: 125}},
+  'Deoxys-Defense': {bs: {hp: 70, at: 60, sa: 60}},
+  Flygon: {bs: {sa: 110}},
+  // Gen 4
+  'Garchomp-Mega': {bs: {sa: 110, sp: 102}},
+  Hippowdon: {bs:{hp:113,df:123,sd:87}},
+  Empoleon: {bs:{hp:90,at:90,df:95}},
+  Shaymin: {bs:{at:70,df:110,sa:110,sd:110}},
+  Toxicroak: {bs:{at:111,df:85,sa:91,sd:85}},
+  Rotom: {bs:{sp:116}},
+  Mamoswine: {bs:{df:90,sd:70}},
+  // Gen 5
+  Conkeldurr: {bs:{hp:115,at:160}},
+  Haxorus: {bs:{hp:78,sd:90,sp:100}},
+  Gigalith: {bs:{sd:100}},
+  Cobalion: {bs:{sa:110}},
+  Virizion: {bs:{sa:110}},
+  Zoroark: {bs:{hp:60,at:105,sa:125,sp:110}},
+  'Zoroark-Hisui': {bs:{hp:60,at:105,sa:125,sp:110}},
+  Swanna: {bs:{hp:80,at:100,df:70}},
+  Samurott: {bs:{at:110,sa:118}},
+  Reuniclus: {bs:{df:85,sd:95}},
+  Krookodile: {bs:{at:130,df:90,sd:70}},
+  Cofagrigus: {bs:{sd:125}},
+  Beartic: {bs:{sp:70}},
+  Beheeyem: {bs:{df:95}},
+  'Basculegion-F': {bs:{at:80,sa:112}},
+  Leavanny: {bs:{sp:117}},
+  // Gen 6
+  // Gen 7
+  // Gen 8
+  // Gen 9
+  Wooloo: {bs:{hp:60,at:70,df:70,sa:50,sd:60}},
+  Dubwool: {bs:{hp:90,at:95}},
+  // Custom
+};
+const SVNDC: {[name: string]: SpeciesData} = extend(true, SS, SV_PATCH, PLA_PATCH, SVNDC_PATCH);
+
+export const SPECIES = [{}, RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV, SVNDC];
 
 export class Species implements I.Species {
   private readonly gen: I.GenerationNum;

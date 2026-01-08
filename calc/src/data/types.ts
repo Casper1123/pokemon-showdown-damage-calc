@@ -431,7 +431,11 @@ const SV: TypeChart = extend(true, {}, SS, {
   },
 });
 
-export const TYPE_CHART = [{}, RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
+const SVNDC: TypeChart = extend(true, {}, SV, {
+  Bug: {Fairy: 1}, // Bug deals 1x damage to Fairy
+});
+
+export const TYPE_CHART = [{}, RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV, SVNDC];
 
 export class Types implements I.Types {
   private readonly gen: I.GenerationNum;
