@@ -56,7 +56,7 @@ export function calculateSMSSSV(
   move: Move,
   field: Field
 ) {
-  // #region Initial
+  // region Initial
 
   checkAirLock(attacker, field);
   checkAirLock(defender, field);
@@ -558,8 +558,8 @@ export function calculateSMSSSV(
 
   const turnOrder = attacker.stats.spe > defender.stats.spe ? 'first' : 'last';
 
-  // #endregion
-  // #region Base Power
+  // endregion
+  // region Base Power
 
   const basePower = calculateBasePowerSMSSSV(
     gen,
@@ -574,21 +574,21 @@ export function calculateSMSSSV(
     return result;
   }
 
-  // #endregion
-  // #region (Special) Attack
+  // endregion
+  // region (Special) Attack
   const attack = calculateAttackSMSSSV(gen, attacker, defender, move, field, desc, isCritical);
   const attackStat =
     move.named('Body Press') ? 'def' : move.category === 'Special' ? 'spa' : 'atk';
-  // #endregion
+  // endregion
 
-  // #region (Special) Defense
+  // region (Special) Defense
 
   const defense = calculateDefenseSMSSSV(gen, attacker, defender, move, field, desc, isCritical);
   const hitsPhysical = move.overrideDefensiveStat === 'def' || move.category === 'Physical';
   const defenseStat = hitsPhysical ? 'def' : 'spd';
 
-  // #endregion
-  // #region Damage
+  // endregion
+  // region Damage
 
   const baseDamage = calculateBaseDamageSMSSSV(
     gen,
@@ -764,7 +764,7 @@ export function calculateSMSSSV(
   }
 
 
-  // #endregion
+  // endregion
 
   return result;
 }
