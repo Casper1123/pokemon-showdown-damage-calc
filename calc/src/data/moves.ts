@@ -4953,7 +4953,6 @@ const SV_NDC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     type: 'Ground',
     category: 'Special',
     zp: 175,
-    // TODO: Sandstorm boost. Setting sandstorm. hits protect
     target: 'allAdjacentFoes',
     maxPower: 130,
     isSound: true,
@@ -4965,7 +4964,6 @@ const SV_NDC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     zp: 180,
     maxPower: 130,
     secondaries: true,
-    // TODO: No contact, uses highest attacking stat. Hits protect,
   },
   Shadowflame: {
     bp: 80,
@@ -4976,7 +4974,7 @@ const SV_NDC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     maxPower: 130,
   },
   'Time Stop': {
-    // TODO: Uh oh?
+    category: 'Status',
     bp: 0,
     type: 'Psychic',
     priority: 4,
@@ -5012,8 +5010,8 @@ const SV_NDC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   },
   'Weave Garments': {
     bp: 0,
+    category: 'Status',
     type: 'Bug',
-    // TODO: Check if this is sufficient.
   },
 };
 
