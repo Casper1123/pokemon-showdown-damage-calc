@@ -4993,14 +4993,6 @@ const SV_NDC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     maxPower: 130,
     // TODO: hits protect. 1.5x power boost when moving after the target.
   },
-  'Shadow Fangs': {
-    bp: 70,
-    type: 'Ghost',
-    category: 'Physical',
-    makesContact: true,
-    isBite: true,
-    breaksProtect: true, // TODO: Does not deal damage when breaking protect.
-  },
   'Needle Throw': {
     bp: 100,
     type: 'Steel',
