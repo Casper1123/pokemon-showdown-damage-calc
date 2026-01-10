@@ -1205,8 +1205,6 @@ export function calculateBPModsSMSSSV(
   if (
     (attacker.hasAbility('Sheer Force') &&
       (move.secondaries || move.named('Electro Shot', 'Order Up')) && !move.isMax) ||
-    (attacker.hasAbility('Sand Force') &&
-      field.hasWeather('Sand') && move.hasType('Rock', 'Ground', 'Steel')) ||
     (attacker.hasAbility('Analytic') &&
       (turnOrder !== 'first' || field.defenderSide.isSwitching === 'out')) ||
     (attacker.hasAbility('Tough Claws') && move.flags.contact) ||
@@ -1263,6 +1261,18 @@ export function calculateBPModsSMSSSV(
     bpMods.push(powMod[Math.min(5, attacker.alliesFainted)]);
     desc.attackerAbility = attacker.ability;
     desc.alliesFainted = attacker.alliesFainted;
+  }
+
+  // Desert Song boost
+  if (move.named('Desert Song') && field.hasWeather(('Sand'))) {
+    bpMods.push(6144); // 1.5x
+    desc.attackerAbility = attacker.ability;
+  }
+  // Sand Force 1.5x
+  if (attacker.hasAbility('Sand Force') &&
+    field.hasWeather('Sand') && move.hasType('Rock', 'Ground', 'Steel')) {
+    bpMods.push(6144);
+    desc.attackerAbility = attacker.ability;
   }
 
   // Items
