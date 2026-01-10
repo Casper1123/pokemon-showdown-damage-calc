@@ -1268,7 +1268,7 @@ export function calculateBPModsSMSSSV(
   // Items
 
   if (attacker.hasItem(`${move.type} Gem`)) {
-    bpMods.push(5325);
+    bpMods.push(6144); // 5325 = 1.3x, 6144 = 1.5x
     desc.attackerItem = attacker.item;
   } else if (
     (((attacker.hasItem('Adamant Crystal') && attacker.named('Dialga-Origin')) ||
@@ -1545,9 +1545,11 @@ export function calculateDefenseSMSSSV(
     defense = pokeRound((defense * 3) / 2);
     desc.weather = field.weather;
   }
-  if (field.hasWeather('Snow') && defender.hasType('Ice') && hitsPhysical) {
-    defense = pokeRound((defense * 3) / 2);
-    desc.weather = field.weather;
+  if (field.hasWeather('Snow')) {
+    if (defender.hasType('Ice') && hitsPhysical) {
+      defense = pokeRound((defense * 3) / 2);
+      desc.weather = field.weather;
+    }
   }
 
   const dfMods = calculateDfModsSMSSSV(
@@ -1807,6 +1809,12 @@ export function calculateFinalModsSMSSSV(
       finalMods.push(2048);
     }
     desc.defenderItem = defender.item;
+  }
+
+  // Gen9 NDC
+  if (attacker.hasType('Ice') && move.hasType('Ice')) {
+    finalMods.push(4915); // 4915/4096 ~= 1.2x
+    desc.weather = field.weather;
   }
 
   return finalMods;
