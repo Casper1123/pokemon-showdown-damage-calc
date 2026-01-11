@@ -1219,6 +1219,9 @@ function createField() {
 	// TODO: support switching in as well!
 	var isSwitchingOut = [$("#switchingL").prop("checked"), $("#switchingR").prop("checked")];
 
+	// NDC Custom
+	var isTrickRoom = $("#trickroom").prop("checked");
+
 	var createSide = function (i) {
 		return new calc.Side({
 			spikes: spikes[i],
