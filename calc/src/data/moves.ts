@@ -4989,7 +4989,6 @@ const SV_NDC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     secondaries: true,
     zp: 160,
     maxPower: 130,
-    // TODO: hits protect. 1.5x power boost when moving after the target.
   },
   'Needle Throw': {
     bp: 100,
