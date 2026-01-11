@@ -562,7 +562,7 @@ export function calculateNDC(
   // endregion
   // region Base Power
 
-  const basePower = calculateBasePowerSMSSSV(
+  const basePower = calculateBasePowerNDC(
     gen,
     attacker,
     defender,
@@ -577,21 +577,21 @@ export function calculateNDC(
 
   // endregion
   // region (Special) Attack
-  const attack = calculateAttackSMSSSV(gen, attacker, defender, move, field, desc, isCritical);
+  const attack = calculateAttackNDC(gen, attacker, defender, move, field, desc, isCritical);
   const attackStat =
     move.named('Body Press') ? 'def' : move.category === 'Special' ? 'spa' : 'atk';
   // endregion
 
   // region (Special) Defense
 
-  const defense = calculateDefenseSMSSSV(gen, attacker, defender, move, field, desc, isCritical);
+  const defense = calculateDefenseNDC(gen, attacker, defender, move, field, desc, isCritical);
   const hitsPhysical = move.overrideDefensiveStat === 'def' || move.category === 'Physical';
   const defenseStat = hitsPhysical ? 'def' : 'spd';
 
   // endregion
   // region Damage
 
-  const baseDamage = calculateBaseDamageSMSSSV(
+  const baseDamage = calculateBaseDamageNDC(
     gen,
     attacker,
     defender,
@@ -632,7 +632,7 @@ export function calculateNDC(
     !attacker.hasAbility('Guts') &&
     !move.named('Facade');
   desc.isBurned = applyBurn;
-  const finalMods = calculateFinalModsSMSSSV(
+  const finalMods = calculateFinalModsNDC(
     gen,
     attacker,
     defender,
@@ -691,9 +691,9 @@ export function calculateNDC(
     for (let times = 1; times < numAttacks; times++) {
       usedItems = checkMultihitBoost(gen, attacker, defender, move,
         field, desc, usedItems[0], usedItems[1]);
-      const newAttack = calculateAttackSMSSSV(gen, attacker, defender, move,
+      const newAttack = calculateAttackNDC(gen, attacker, defender, move,
         field, desc, isCritical);
-      const newDefense = calculateDefenseSMSSSV(gen, attacker, defender, move,
+      const newDefense = calculateDefenseNDC(gen, attacker, defender, move,
         field, desc, isCritical);
       // Check if lost -ate ability. Typing stays the same, only boost is lost
       // Cannot be regained during multihit move and no Normal moves with stat drawbacks
@@ -709,7 +709,7 @@ export function calculateNDC(
         stabMod = getStellarStabMod(attacker, move, preStellarStabMod, times);
       }
 
-      const newBasePower = calculateBasePowerSMSSSV(
+      const newBasePower = calculateBasePowerNDC(
         gen,
         attacker,
         defender,
@@ -719,7 +719,7 @@ export function calculateNDC(
         desc,
         times + 1
       );
-      const newBaseDamage = calculateBaseDamageSMSSSV(
+      const newBaseDamage = calculateBaseDamageNDC(
         gen,
         attacker,
         defender,
@@ -731,7 +731,7 @@ export function calculateNDC(
         desc,
         isCritical
       );
-      const newFinalMods = calculateFinalModsSMSSSV(
+      const newFinalMods = calculateFinalModsNDC(
         gen,
         attacker,
         defender,
@@ -770,7 +770,7 @@ export function calculateNDC(
   return result;
 }
 
-export function calculateBasePowerSMSSSV(
+export function calculateBasePowerNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,
@@ -780,7 +780,10 @@ export function calculateBasePowerSMSSSV(
   desc: RawDesc,
   hit = 1,
 ) {
-  const turnOrder = attacker.stats.spe > defender.stats.spe ? 'first' : 'last';
+  let turnOrder = attacker.stats.spe > defender.stats.spe ? 'first' : 'last';
+  if (field.isTrickRoom) { // Flip in TR.
+    turnOrder = turnOrder === 'first' ? 'last' : 'first';
+  }
 
   let basePower: number;
 
@@ -1007,7 +1010,7 @@ export function calculateBasePowerSMSSSV(
     // show z-move power in description
     desc.moveBP = move.bp;
   }
-  const bpMods = calculateBPModsSMSSSV(
+  const bpMods = calculateBPModsNDC(
     gen,
     attacker,
     defender,
@@ -1035,7 +1038,7 @@ export function calculateBasePowerSMSSSV(
   return basePower;
 }
 
-export function calculateBPModsSMSSSV(
+export function calculateBPModsNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,
@@ -1316,7 +1319,7 @@ export function calculateBPModsSMSSSV(
   return bpMods;
 }
 
-export function calculateAttackSMSSSV(
+export function calculateAttackNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,
@@ -1356,12 +1359,12 @@ export function calculateAttackSMSSSV(
     attack = pokeRound((attack * 3) / 2);
     desc.attackerAbility = attacker.ability;
   }
-  const atMods = calculateAtModsSMSSSV(gen, attacker, defender, move, field, desc);
+  const atMods = calculateAtModsNDC(gen, attacker, defender, move, field, desc);
   attack = OF16(Math.max(1, pokeRound((attack * chainMods(atMods, 410, 131072)) / 4096)));
   return attack;
 }
 
-export function calculateAtModsSMSSSV(
+export function calculateAtModsNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,
@@ -1517,7 +1520,7 @@ export function calculateAtModsSMSSSV(
   return atMods;
 }
 
-export function calculateDefenseSMSSSV(
+export function calculateDefenseNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,
@@ -1562,7 +1565,7 @@ export function calculateDefenseSMSSSV(
     }
   }
 
-  const dfMods = calculateDfModsSMSSSV(
+  const dfMods = calculateDfModsNDC(
     gen,
     attacker,
     defender,
@@ -1576,7 +1579,7 @@ export function calculateDefenseSMSSSV(
   return OF16(Math.max(1, pokeRound((defense * chainMods(dfMods, 410, 131072)) / 4096)));
 }
 
-export function calculateDfModsSMSSSV(
+export function calculateDfModsNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,
@@ -1659,7 +1662,7 @@ export function calculateDfModsSMSSSV(
   return dfMods;
 }
 
-function calculateBaseDamageSMSSSV(
+function calculateBaseDamageNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,
@@ -1711,7 +1714,7 @@ function calculateBaseDamageSMSSSV(
   return baseDamage;
 }
 
-export function calculateFinalModsSMSSSV(
+export function calculateFinalModsNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,

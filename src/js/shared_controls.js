@@ -1261,7 +1261,10 @@ function createField() {
 		isWonderRoom: isWonderRoom,
 		isGravity: isGravity,
 		attackerSide: createSide(0),
-		defenderSide: createSide(1)
+		defenderSide: createSide(1),
+
+		// NDC custom
+		isTrickRoom: isTrickRoom,
 	});
 }
 
@@ -1542,6 +1545,9 @@ function clearField() {
 	$("#switchingL").prop("checked", false);
 	$("#switchingR").prop("checked", false);
 	$("input:checkbox[name='terrain']").prop("checked", false);
+
+	// NDC custom
+	$("#trickroom").prop("checked", false);
 }
 
 function getSetOptions(sets) {
