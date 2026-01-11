@@ -87,13 +87,21 @@ export function calculateNDC(
   checkWindRider(attacker, field.attackerSide);
   checkWindRider(defender, field.defenderSide);
 
-  if (move.named('Meteor Beam', 'Electro Shot')) {
+  if (move.named('Meteor Beam', 'Electro Shot', 'Ice Burn')) {
     attacker.boosts.spa +=
       attacker.hasAbility('Simple') ? 2
       : attacker.hasAbility('Contrary') ? -1
       : 1;
     // restrict to +- 6
     attacker.boosts.spa = Math.min(6, Math.max(-6, attacker.boosts.spa));
+  }
+  if (move.named('Freeze Shock')) {
+    attacker.boosts.atk +=
+      attacker.hasAbility('Simple') ? 2
+      : attacker.hasAbility('Contrary') ? -1
+      : 1;
+    // restrict to +- 6
+    attacker.boosts.atk = Math.min(6, Math.max(-6, attacker.boosts.atk));
   }
 
   computeFinalStats(gen, attacker, defender, field, 'atk', 'spa');
@@ -1221,7 +1229,8 @@ export function calculateBPModsNDC(
   // Sheer Force does not power up max moves or remove the effects (SadisticMystic)
   if (
     (attacker.hasAbility('Sheer Force') &&
-      (move.secondaries || move.named('Electro Shot', 'Order Up')) && !move.isMax) ||
+      (move.secondaries || move.named('Electro Shot', 'Order Up', 'Freeze Shock', 'Ice Burn')) &&
+      !move.isMax) ||
     (attacker.hasAbility('Analytic') &&
       (turnOrder !== 'first' || field.defenderSide.isSwitching === 'out')) ||
     (attacker.hasAbility('Tough Claws') && move.flags.contact) ||
