@@ -185,7 +185,7 @@ export function calculateNDC(
     'Thermal Exchange', 'Thick Fat', 'Unaware', 'Vital Spirit',
     'Volt Absorb', 'Water Absorb', 'Water Bubble', 'Water Veil',
     'Well-Baked Body', 'White Smoke', 'Wind Rider', 'Wonder Guard',
-    'Wonder Skin'
+    'Wonder Skin', 'Terravore'
   );
 
   const attackerIgnoresAbility = attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze');
@@ -479,6 +479,7 @@ export function calculateNDC(
   }
 
   if ((defender.hasAbility('Wonder Guard') && typeEffectiveness <= 1) ||
+      (move.hasType('Rock') && defender.hasAbility('Terravore')) ||
       (move.hasType('Grass') && defender.hasAbility('Sap Sipper')) ||
       (move.hasType('Fire') && defender.hasAbility('Flash Fire', 'Well-Baked Body')) ||
       (move.hasType('Water') && defender.hasAbility('Dry Skin', 'Storm Drain', 'Water Absorb')) ||
@@ -1441,6 +1442,11 @@ export function calculateAtModsNDC(
     (attacker.hasAbility('Rocky Payload') && move.hasType('Rock'))
   ) {
     atMods.push(6144);
+    desc.attackerAbility = attacker.ability;
+  } else if (
+    attacker.hasAbility('Terravore') && attacker.abilityOn && move.hasType('Rock')
+  ) {
+    atMods.push(5120); // 1.25x
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Transistor') && move.hasType('Electric')) {
     atMods.push(gen.num >= 9 ? 5325 : 6144);
