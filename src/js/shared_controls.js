@@ -1221,6 +1221,7 @@ function createField() {
 
 	// NDC Custom
 	var isTrickRoom = $("#trickroom").prop("checked");
+	var chronalEffect = $("input:radio[name='chronal']:checked").val() || "";
 
 	var createSide = function (i) {
 		return new calc.Side({
@@ -1265,6 +1266,8 @@ function createField() {
 
 		// NDC custom
 		isTrickRoom: isTrickRoom,
+		isChronalDistortion: chronalEffect === "ChronalDistortion",
+		isDistortedFragment: chronalEffect === "DistortedFragment",
 	});
 }
 
@@ -1548,6 +1551,8 @@ function clearField() {
 
 	// NDC custom
 	$("#trickroom").prop("checked", false);
+	$("input:radio[name='chronal']").prop("checked", false);
+
 }
 
 function getSetOptions(sets) {

@@ -19,6 +19,9 @@ export class Field implements State.Field {
   attackerSide: Side;
   defenderSide: Side;
 
+  isChronalDistortion: boolean;
+  isDistortedFragment: boolean;
+
   constructor(field: Partial<State.Field> = {}) {
     this.gameType = field.gameType || 'Singles';
     this.terrain = field.terrain;
@@ -34,6 +37,9 @@ export class Field implements State.Field {
     this.isSwordOfRuin = field.isSwordOfRuin || false;
     this.isTabletsOfRuin = field.isTabletsOfRuin || false;
     this.isVesselOfRuin = field.isVesselOfRuin || false;
+
+    this.isChronalDistortion = field.isChronalDistortion || false;
+    this.isDistortedFragment = field.isDistortedFragment || false;
 
     this.attackerSide = new Side(field.attackerSide || {});
     this.defenderSide = new Side(field.defenderSide || {});
@@ -70,6 +76,8 @@ export class Field implements State.Field {
       isSwordOfRuin: this.isSwordOfRuin,
       isTabletsOfRuin: this.isTabletsOfRuin,
       isVesselOfRuin: this.isVesselOfRuin,
+      isChronalDistortion: this.isChronalDistortion,
+      isDistortedFragment: this.isDistortedFragment,
     });
   }
 }

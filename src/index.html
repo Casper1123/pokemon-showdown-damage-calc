@@ -867,6 +867,16 @@
 							 id="gravity"/>
 					<label class="btn" for="gravity">Gravity</label>
 				</div>
+				<div class="gen-specific g10" style="width: 11em; margin: 5px auto;" title="Select chronal effects.">
+					<span hidden id="chronalDistortionInstruction">Is the move distorted by Chronal Distortions?</span>
+					<span hidden id="distortedFragmentInstruction">Is this a fragment of a move created by Chronal Distortion?</span>
+					<input aria-describedby="chronalInstruction" class="visually-hidden calc-trigger" type="radio" name="chronal" value="" id="chronal-none" checked="checked" />
+					<label class="btn btn-small btn-left" for="chronal-none">None</label>
+					<input aria-describedby="chronalDistortionInstruction" class="visually-hidden calc-trigger" type="radio" name="chronal" value="ChronalDistortion" id="chronaldistortion" />
+					<label class="btn btn-wide btn-left" for="chronaldistortion">Chronal Distortion</label>
+					<input aria-describedby="distortedFragmentInstruction" class="visually-hidden calc-trigger" type="radio" name="chronal" value="DistortedFragment" id="distortedfragment" />
+					<label class="btn btn-wide btn-right" for="distortedfragment">Distorted Fragment</label>
+				</div>
 				<hr class="gen-specific g2 g3 g4 g5 g6 g7 g8 g9 g10"/>
 				<table class="field">
 					<thead>

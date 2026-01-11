@@ -1166,6 +1166,20 @@ export function calculateBPModsNDC(
     }
   }
 
+  // Chronal Distortion and it's Distorted move effect
+  if (field.isChronalDistortion || field.isDistortedFragment) {
+    if (!move.named('Fake Out', 'Future Sight', 'Doom Desire', 'Thunderclap', 'Sucker Punch')) {
+      const modifier = field.isChronalDistortion ? 3277 : 1638;
+      bpMods.push(modifier);
+      desc.moveBP = Math.floor(basePower * (field.isChronalDistortion ? 0.8 : 0.4));
+      if (field.isChronalDistortion) {
+        desc.isDistortedMove = true;
+      } else {
+        desc.isDistortedFragment = true;
+      }
+    }
+  }
+
   // Abilities
 
   // Use BasePower after moves with custom BP to determine if Technician should boost

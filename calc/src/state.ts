@@ -53,6 +53,9 @@ export namespace State {
     isVesselOfRuin?: boolean;
     attackerSide: Side;
     defenderSide: Side;
+
+    isChronalDistortion: boolean;
+    isDistortedFragment: boolean;
   }
 
   export interface Side {
