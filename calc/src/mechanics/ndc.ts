@@ -49,7 +49,7 @@ import {
   getStellarStabMod,
 } from './util';
 
-export function calculateSMSSSV(
+export function calculateNDC(
   gen: Generation,
   attacker: Pokemon,
   defender: Pokemon,
@@ -660,7 +660,7 @@ export function calculateSMSSSV(
     const child = attacker.clone();
     child.ability = 'Parental Bond (Child)' as AbilityName;
     checkMultihitBoost(gen, child, defender, move, field, desc);
-    childDamage = calculateSMSSSV(gen, child, defender, move, field).damage as number[];
+    childDamage = calculateNDC(gen, child, defender, move, field).damage as number[];
     desc.attackerAbility = attacker.ability;
   }
 
