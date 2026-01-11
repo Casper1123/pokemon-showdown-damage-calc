@@ -1813,7 +1813,7 @@ export function calculateFinalModsNDC(
     desc.defenderAbility = defender.ability;
   }
 
-  if (defender.hasAbility('Fluffy') && move.flags.contact && !attacker.hasAbility('Long Reach')) {
+  if (defender.hasAbility('Fluffy') && move.flags.contact && !attacker.hasAbility('Long Reach', 'Weaver\'s Dance')) {
     finalMods.push(2048);
     desc.defenderAbility = defender.ability;
   } else if (
