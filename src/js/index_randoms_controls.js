@@ -202,6 +202,7 @@ function calculateAllMoves(gen, p1, p1field, p2, p2field) {
 	return results;
 }
 
+/*
 $(".mode").change(function () {
 	var params = new URLSearchParams(window.location.search);
 	params.set('mode', $(this).attr("id"));
@@ -216,6 +217,7 @@ $(".mode").change(function () {
 		window.location.replace('honkalculate.html?' + params);
 	}
 });
+ */
 
 $(".notation").change(function () {
 	performCalculations();

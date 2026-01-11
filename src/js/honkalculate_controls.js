@@ -236,7 +236,7 @@ function placeBsBtn() {
 		performCalculations();
 	});
 }
-
+/*
 $(".mode").change(function () {
 	if ($("#one-vs-one").prop("checked")) {
 		var params = new URLSearchParams(window.location.search);
@@ -259,6 +259,7 @@ $(".mode").change(function () {
 		window.location.replace('honkalculate.html?' + params);
 	}
 });
+ */
 
 $(".tiers label").mouseup(function () {
 	var oldID = $('.tiers input:checked').attr("id");

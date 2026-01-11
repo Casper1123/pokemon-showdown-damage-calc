@@ -1,3 +1,8 @@
+.modeSelection {
+	display: none !important;
+}
+/* hide each individual mode from being selected.
+
 /*********************************************************
  * Layout
  *********************************************************/
