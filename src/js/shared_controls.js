@@ -37,7 +37,7 @@ function endsWith(string, target) {
 
 var LEGACY_STATS_RBY = ["hp", "at", "df", "sl", "sp"];
 var LEGACY_STATS_GSC = ["hp", "at", "df", "sa", "sd", "sp"];
-var LEGACY_STATS = [[], LEGACY_STATS_RBY, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC];
+var LEGACY_STATS = [[], LEGACY_STATS_RBY, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC, LEGACY_STATS_GSC];
 var HIDDEN_POWER_REGEX = /Hidden Power (\w*)/;
 
 var CALC_STATUS = {
@@ -271,7 +271,7 @@ $(".ability").bind("keyup change", function () {
 		$(this).closest(".poke-info").find(moveSelector).find(".move-hits").val(moveHits);
 	}
 
-	var TOGGLE_ABILITIES = ['Flash Fire', 'Intimidate', 'Minus', 'Plus', 'Slow Start', 'Unburden', 'Stakeout', 'Teraform Zero'];
+	var TOGGLE_ABILITIES = ['Flash Fire', 'Intimidate', 'Minus', 'Plus', 'Slow Start', 'Unburden', 'Stakeout', 'Teraform Zero', 'Terravore'];
 
 	if (TOGGLE_ABILITIES.indexOf(ability) >= 0) {
 		$(this).closest(".poke-info").find(".abilityToggle").show();
