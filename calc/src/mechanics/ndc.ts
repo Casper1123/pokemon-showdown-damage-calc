@@ -1446,6 +1446,10 @@ export function calculateAtModsNDC(
     atMods.push(8192);
     desc.attackerAbility = attacker.ability;
   }
+  if (attacker.hasAbility('Frolicking') && move.type === 'Grass') {
+    atMods.push(6144); // 1.5x STAB boost
+    desc.attackerAbility = attacker.ability;
+  }
 
   if (
     field.attackerSide.isFlowerGift &&
@@ -1579,6 +1583,12 @@ export function calculateDefenseNDC(
     }
   }
 
+  if (defender.hasAbility('Frolicking') && field.hasTerrain('Grassy')) {
+    defense = pokeRound((defense * 3) / 2); // 1.5x boost
+    desc.defenderAbility = defender.ability;
+    desc.terrain = field.terrain;
+  }
+
   const dfMods = calculateDfModsNDC(
     gen,
     attacker,
@@ -1649,6 +1659,10 @@ export function calculateDfModsNDC(
       desc[hitsPhysical ? 'isSwordOfRuin' : 'isBeadsOfRuin'] = true;
     }
     dfMods.push(3072);
+  }
+  if (defender.hasAbility('Frolicking') && move.hasType('Water', 'Ground', 'Grass', 'Electric')) {
+    dfMods.push(2048); // 0.5x damage (resistance)
+    desc.defenderAbility = defender.ability;
   }
 
   if (isQPActive(defender, field)) {

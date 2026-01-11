@@ -629,8 +629,14 @@ function getEndOfTurn(
   }
 
   if (defender.hasItem('Leftovers') && !loseItem && !healBlock) {
-    damage += Math.floor(defender.maxHP() / 16);
-    texts.push('Leftovers recovery');
+    let healing = Math.floor(defender.maxHP() / 16);
+    if (defender.hasAbility('Frolicking') && field.hasTerrain('Grassy')) {
+      healing *= 2;
+      texts.push('Frolicking Leftovers recovery');
+    } else {
+      texts.push('Leftovers recovery');
+    }
+    damage += healing;
   } else if (defender.hasItem('Black Sludge') && !loseItem) {
     if (defender.hasType('Poison')) {
       if (!healBlock) {
@@ -669,8 +675,14 @@ function getEndOfTurn(
 
   if (field.hasTerrain('Grassy')) {
     if (isGrounded(defender, field) && !healBlock) {
-      damage += Math.floor(defender.maxHP() / 16);
-      texts.push('Grassy Terrain recovery');
+      let healing = Math.floor(defender.maxHP() / 16);
+      if (defender.hasAbility('Frolicking')) {
+        healing *= 2; // Double the healing
+        texts.push('Frolicking Grassy Terrain recovery');
+      } else {
+        texts.push('Grassy Terrain recovery');
+      }
+      damage += healing;
     }
   }
 
