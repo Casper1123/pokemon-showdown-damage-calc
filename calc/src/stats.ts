@@ -10,9 +10,10 @@ const XY: StatID[] = GSC;
 const SM: StatID[] = GSC;
 const SS: StatID[] = GSC;
 const SV: StatID[] = GSC;
+const SVNDC: StatID[] = GSC;
 
 export const STATS: Array<Array<StatID | 'spc'> | StatID[]> =
-  [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
+  [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV, SVNDC];
 
 type HPTypeName = Exclude<TypeName, 'Normal' | 'Fairy' | 'Stellar' | '???'>;
 
@@ -40,7 +41,7 @@ const HP: {[type in HPTypeName]: {ivs: Partial<StatsTable>; dvs: Partial<StatsTa
   Water: {ivs: {atk: 30, def: 30, spa: 30}, dvs: {atk: 14, def: 13}},
 };
 
-export const Stats = new (class {
+export const Stats = new class {
   displayStat(stat: StatID | 'spc') {
     switch (stat) {
     case 'hp':
@@ -116,7 +117,7 @@ export const Stats = new (class {
     level: number,
     nature?: string
   ) {
-    if (gen.num < 1 || gen.num > 9) throw new Error(`Invalid generation ${gen.num}`);
+    if (gen.num < 1 && gen.num > 10) throw new Error(`Invalid generation ${gen.num}`); // I fucking HATE this call. replaced || with &&
     if (gen.num < 3) return this.calcStatRBY(stat, base, iv, level);
     return this.calcStatADV(gen.natures, stat, base, iv, ev, level, nature);
   }
@@ -210,4 +211,4 @@ export const Stats = new (class {
       };
     }
   }
-})();
+}();

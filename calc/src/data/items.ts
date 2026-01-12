@@ -609,7 +609,7 @@ const BERRIES: {[berry: string]: {t: I.TypeName; p: number}} = {
 
 export const MEGA_STONES = Object.assign({}, GEN_6_MEGA_STONES, ZA_MEGA_STONES);
 
-export const ITEMS = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
+export const ITEMS = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV, SV]; // Added another SV for SVNDC
 
 export class Items implements I.Items {
   private readonly gen: I.GenerationNum;

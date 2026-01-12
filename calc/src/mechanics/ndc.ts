@@ -87,13 +87,21 @@ export function calculateNDC(
   checkWindRider(attacker, field.attackerSide);
   checkWindRider(defender, field.defenderSide);
 
-  if (move.named('Meteor Beam', 'Electro Shot')) {
+  if (move.named('Meteor Beam', 'Electro Shot', 'Ice Burn')) {
     attacker.boosts.spa +=
       attacker.hasAbility('Simple') ? 2
       : attacker.hasAbility('Contrary') ? -1
       : 1;
     // restrict to +- 6
     attacker.boosts.spa = Math.min(6, Math.max(-6, attacker.boosts.spa));
+  }
+  if (move.named('Freeze Shock')) {
+    attacker.boosts.atk +=
+      attacker.hasAbility('Simple') ? 2
+      : attacker.hasAbility('Contrary') ? -1
+      : 1;
+    // restrict to +- 6
+    attacker.boosts.atk = Math.min(6, Math.max(-6, attacker.boosts.atk));
   }
 
   computeFinalStats(gen, attacker, defender, field, 'atk', 'spa');
@@ -177,7 +185,7 @@ export function calculateNDC(
     'Thermal Exchange', 'Thick Fat', 'Unaware', 'Vital Spirit',
     'Volt Absorb', 'Water Absorb', 'Water Bubble', 'Water Veil',
     'Well-Baked Body', 'White Smoke', 'Wind Rider', 'Wonder Guard',
-    'Wonder Skin'
+    'Wonder Skin', 'Terravore'
   );
 
   const attackerIgnoresAbility = attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze');
@@ -471,6 +479,7 @@ export function calculateNDC(
   }
 
   if ((defender.hasAbility('Wonder Guard') && typeEffectiveness <= 1) ||
+      (move.hasType('Rock') && defender.hasAbility('Terravore')) ||
       (move.hasType('Grass') && defender.hasAbility('Sap Sipper')) ||
       (move.hasType('Fire') && defender.hasAbility('Flash Fire', 'Well-Baked Body')) ||
       (move.hasType('Water') && defender.hasAbility('Dry Skin', 'Storm Drain', 'Water Absorb')) ||
@@ -1221,7 +1230,8 @@ export function calculateBPModsNDC(
   // Sheer Force does not power up max moves or remove the effects (SadisticMystic)
   if (
     (attacker.hasAbility('Sheer Force') &&
-      (move.secondaries || move.named('Electro Shot', 'Order Up')) && !move.isMax) ||
+      (move.secondaries || move.named('Electro Shot', 'Order Up', 'Freeze Shock', 'Ice Burn')) &&
+      !move.isMax) ||
     (attacker.hasAbility('Analytic') &&
       (turnOrder !== 'first' || field.defenderSide.isSwitching === 'out')) ||
     (attacker.hasAbility('Tough Claws') && move.flags.contact) ||
@@ -1432,6 +1442,11 @@ export function calculateAtModsNDC(
     (attacker.hasAbility('Rocky Payload') && move.hasType('Rock'))
   ) {
     atMods.push(6144);
+    desc.attackerAbility = attacker.ability;
+  } else if (
+    attacker.hasAbility('Terravore') && attacker.abilityOn && move.hasType('Rock')
+  ) {
+    atMods.push(5120); // 1.25x
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Transistor') && move.hasType('Electric')) {
     atMods.push(gen.num >= 9 ? 5325 : 6144);
@@ -1798,7 +1813,7 @@ export function calculateFinalModsNDC(
     desc.defenderAbility = defender.ability;
   }
 
-  if (defender.hasAbility('Fluffy') && move.flags.contact && !attacker.hasAbility('Long Reach')) {
+  if (defender.hasAbility('Fluffy') && move.flags.contact && !attacker.hasAbility('Long Reach', 'Weaver\'s Dance')) {
     finalMods.push(2048);
     desc.defenderAbility = defender.ability;
   } else if (

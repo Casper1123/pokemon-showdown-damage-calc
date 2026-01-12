@@ -2,47 +2,42 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width"/>
-	<title>Pok&eacute;mon Damage Calculator</title>
-	<link rel="icon" type="image/x-icon" href="./img/favicon.png">
-	<link type="text/css" rel="stylesheet" href="./js/vendor/select2/select2.css"/>
-	<link type="text/css" rel="stylesheet" href="./css/main.css?"/>
-	<link type="text/css" rel="stylesheet" href="./css/vendor/bootstrap.css"/>
-	<link type="text/css" rel="stylesheet" href="./css/dark-theme.css?" id="dark-theme-styles">
-	<!-- Immediately loads the dark theme in order to reduce FOIT -->
-	<script>
-		// localStorage will only store strings
-		// This means that if it has the value 'false',
-		// It will be truthy.
-		if ((localStorage.getItem('darkTheme') || '' + window.matchMedia('(prefers-color-scheme: dark)').matches) === 'false') {
-			document.getElementById('dark-theme-styles').disabled = true;
-		}
-	</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Pok&eacute;mon Damage Calculator</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
+    <link type="text/css" rel="stylesheet" href="./js/vendor/select2/select2.css" />
+    <link type="text/css" rel="stylesheet" href="./css/main.css?" />
+    <link type="text/css" rel="stylesheet" href="./css/vendor/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="./css/dark-theme.css?" id="dark-theme-styles">
+    <!-- Immediately loads the dark theme in order to reduce FOIT -->
+    <script>
+        // localStorage will only store strings
+        // This means that if it has the value 'false',
+        // It will be truthy.
+        if ((localStorage.getItem('darkTheme') || '' + window.matchMedia('(prefers-color-scheme: dark)').matches) === 'false') {
+            document.getElementById('dark-theme-styles').disabled = true;
+        }
+    </script>
 </head>
 
 <body class="dark-theme">
-<!--
-<header>
-	<div class="nav-wrapper">
-		<ul class="nav">
-			<li><a class="button nav-first" href="//pokemonshowdown.com/"><img src="./img/pokemonshowdownbeta.png"
-																									 srcset="./img/pokemonshowdownbeta.png 1x, ./img/pokemonshowdownbeta@2x.png 2x"
-																									 alt="Pok&eacute;mon Showdown" width="146"
-																									 height="44"/> Home</a></li>
-			<li><a class="button" href="//pokemonshowdown.com/dex/">Pok&eacute;dex</a></li>
-			<li><a class="button" href="//replay.pokemonshowdown.com/">Replay</a></li>
-			<li><a class="button purplebutton" href="//smogon.com/dex/" target="_blank">Strategy</a></li>
-			<li><a class="button nav-last purplebutton" href="//smogon.com/forums/" target="_blank">Forum</a></li>
-			<li><a class="button greenbutton nav-first nav-last" href="//play.pokemonshowdown.com/">Play</a></li>
-		</ul>
-	</div>
-</header>
--->
+
+<!--<header>
+    <div class="nav-wrapper"><ul class="nav">
+        <li><a class="button nav-first" href="//pokemonshowdown.com/"><img src="./img/pokemonshowdownbeta.png" srcset="./img/pokemonshowdownbeta.png 1x, ./img/pokemonshowdownbeta@2x.png 2x" alt="Pok&eacute;mon Showdown" width="146" height="44" /> Home</a></li>
+        <li><a class="button" href="//pokemonshowdown.com/dex/">Pok&eacute;dex</a></li>
+        <li><a class="button" href="//replay.pokemonshowdown.com/">Replay</a></li>
+        <li><a class="button purplebutton" href="//smogon.com/dex/" target="_blank">Strategy</a></li>
+        <li><a class="button nav-last purplebutton" href="//smogon.com/forums/" target="_blank">Forum</a></li>
+        <li><a class="button greenbutton nav-first nav-last" href="//play.pokemonshowdown.com/">Play</a></li>
+    </ul></div>
+</header>-->
+
 <!-- START WRAPPER -->
 <div class="wrapper">
 
-	<span class="title-text main-title-text">Pok&eacute;mon Damage Calculator</span>
+	<span class="title-text main-title-text"><BR>Pok&eacute;mon Damage Calculator</span>
 	<div aria-label="Settings" role="region">
         <span class="genSelection" aria-labelledby="selectGenInstruction" role="radiogroup"
 				  title="Select the generation.">
@@ -57,8 +52,8 @@
 			  <input class="gen visually-hidden" type="radio" name="gen" value="8" id="gen8" /><label class="btn btn-small btn-mid" for="gen8">S/S</label>-->
 			  <input class="gen visually-hidden" type="radio" name="gen" value="9" id="gen9"/><label
 			  class="btn btn-small btn-mid" for="gen9">S/V</label>
-            <input class="gen visually-hidden" type="radio" name="gen" value="g10" id="g10" checked="checked"/><label
-			  class="btn btn-small btn-right" for="g10">NDC</label>
+            <input class="gen visually-hidden" type="radio" name="gen" value="10" id="gen10" checked="checked" /><label
+			  class="btn btn-small btn-right" for="gen10">NDC</label>
         </span>
 		<span class="notationSelection" aria-labelledby="selectNotationInstruction" role="radiogroup"
 				title="Select the output notation.">
@@ -805,7 +800,7 @@
 						<input class="weather visually-hidden calc-trigger" type="radio" name="weather" value="Sand"
 								 id="sand"/>
 						<label class="btn btn-small btn-mid" for="sand">Sand</label>
-						<span class="gen-specific g3 g4 g5 g6 g7 g8 g10">
+						<span class="gen-specific g3 g4 g5 g6 g7 g8">
                             <input class="weather visually-hidden calc-trigger" type="radio" name="weather" value="Hail"
 											  id="hail"/>
                             <label class="btn btn-small btn-right" for="hail">Hail</label>
@@ -846,19 +841,19 @@
 					<label class="btn btn-small btn-right" for="gscSand">Sand</label>
 				</div>
 				<div class="gen-specific g5 g6 g7 g8 g9 g10"
-					  style="width: 22.2em; margin: 5px auto; display: inline-block;">
+					  style="width: 25em; margin: 5px auto; display: inline-block;">
 					<span hidden id="magicRoomInstruction">Is Magic Room in effect?</span>
 					<span hidden id="wonderRoomInstruction">Is Wonder Room in effect?</span>
 					<span hidden id="trickRoomInstruction">Is Trick Room in effect?</span>
 					<input aria-describedby="magicRoomInstruction" class="visually-hidden calc-trigger" type="checkbox"
 							 id="magicroom"/>
-					<label class="btn btn-xxxwide btn-left" for="magicroom">Magic Room</label>
+					<label class="btn btn-xxwide btn-left" for="magicroom">Magic Room</label>
 					<input aria-describedby="wonderRoomInstruction" class="visually-hidden calc-trigger" type="checkbox"
 							 id="wonderroom"/>
-					<label class="btn btn-xxxwide btn-right" for="wonderroom">Wonder Room</label>
+					<label class="btn btn-xxwide btn-mid" for="wonderroom">Wonder Room</label>
 					<input aria-describedby="trickRoomInstruction" class="visually-hidden calc-trigger gen-specific g10"
 							 type="checkbox" id="trickroom"/>
-					<label class="btn btn-xxxwide btn-right gen-specific g10" for="trickroom">Trick Room</label>
+					<label class="btn btn-xxwide btn-right gen-specific g10" for="trickroom">Trick Room</label>
 				</div>
 				<div class="gen-specific g4 g5 g6 g7 g8 g9 g10" style="width: 5.3em; margin: 5px auto;"
 					  title="Is gravity in effect?">
@@ -867,15 +862,15 @@
 							 id="gravity"/>
 					<label class="btn" for="gravity">Gravity</label>
 				</div>
-				<div class="gen-specific g10" style="width: 11em; margin: 5px auto;" title="Select chronal effects.">
+				<div class="gen-specific g10" style="width: 25em; margin: 5px auto;" title="Select chronal effects.">
 					<span hidden id="chronalDistortionInstruction">Is the move distorted by Chronal Distortions?</span>
 					<span hidden id="distortedFragmentInstruction">Is this a fragment of a move created by Chronal Distortion?</span>
 					<input aria-describedby="chronalInstruction" class="visually-hidden calc-trigger" type="radio" name="chronal" value="" id="chronal-none" checked="checked" />
 					<label class="btn btn-small btn-left" for="chronal-none">None</label>
 					<input aria-describedby="chronalDistortionInstruction" class="visually-hidden calc-trigger" type="radio" name="chronal" value="ChronalDistortion" id="chronaldistortion" />
-					<label class="btn btn-wide btn-left" for="chronaldistortion">Chronal Distortion</label>
+					<label class="btn btn-xxxwide btn-mid" for="chronaldistortion">Chronal Distortion</label>
 					<input aria-describedby="distortedFragmentInstruction" class="visually-hidden calc-trigger" type="radio" name="chronal" value="DistortedFragment" id="distortedfragment" />
-					<label class="btn btn-wide btn-right" for="distortedfragment">Distorted Fragment</label>
+					<label class="btn btn-xxxwide btn-right" for="distortedfragment">Distorted Fragment</label>
 				</div>
 				<hr class="gen-specific g2 g3 g4 g5 g6 g7 g8 g9 g10"/>
 				<table class="field">
@@ -1971,6 +1966,7 @@
 	<script type="text/javascript" src="./calc/field.js?"></script>
 	<script type="text/javascript" src="./calc/items.js?"></script>
 	<script type="text/javascript" src="./calc/mechanics/util.js?"></script>
+	<script type="text/javascript" src="./calc/mechanics/ndc.js?"></script>
 	<script type="text/javascript" src="./calc/mechanics/gen789.js?"></script>
 	<script type="text/javascript" src="./calc/mechanics/gen56.js?"></script>
 	<script type="text/javascript" src="./calc/mechanics/gen4.js?"></script>
@@ -1987,21 +1983,16 @@
 </div>
 <!-- END WRAPPER -->
 
-<div class="credits">Created by Honko; maintained by Austin, Kris, <a
-	href="https://github.com/smogon/damage-calc/contributors" class="links-lighten" target="_blank">and others</a>.
-	<ul>
-		<li><a href="https://www.smogon.com/forums/threads/pok%C3%A9mon-showdown-damage-calculator.3593546/"
-				 class="links-lighten" target="_blank">Bug Reports</a></li>
-		<li><a href="https://github.com/smogon/damage-calc" class="links-lighten" target="_blank">GitHub repository</a>
-		</li>
-	</ul>
+<div class="credits">Created by Honko; maintained by Casper1123 and <a href="https://github.com/smogon/damage-calc/contributors" class="links-lighten" target="_blank">original authors.</a>.
+    <ul><li><a href="https://github.com/Casper1123/pokemon-showdown-damage-calc/issues" class="links-lighten" target="_blank">Bug Reports</a></li>
+    <li><a href="https://github.com/Casper1123/pokemon-showdown-damage-calc" class="links-lighten" target="_blank">GitHub repository</a></li></ul>
 
-	<select id="dark-theme-toggle">
-		<option value="">Auto dark theme</option>
-		<option value="false">Light theme</option>
-		<option value="true">Dark theme</option>
-	</select>
-	<script type="text/javascript" src="./js/dark-theme-toggle.js?"></script>
+    <select id="dark-theme-toggle">
+        <option value="">Auto dark theme</option>
+        <option value="false">Light theme</option>
+        <option value="true">Dark theme</option>
+    </select>
+    <script type="text/javascript" src="./js/dark-theme-toggle.js?"></script>
 </div>
 
 </body>
