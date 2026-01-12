@@ -1661,7 +1661,7 @@ export function calculateDfModsNDC(
     dfMods.push(3072);
   }
   if (defender.hasAbility('Frolicking') && move.hasType('Water', 'Ground', 'Grass', 'Electric')) {
-    dfMods.push(2048); // 0.5x damage (resistance)
+    dfMods.push(8192); // 2x defense --> half damage taken
     desc.defenderAbility = defender.ability;
   }
 
